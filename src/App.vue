@@ -8,7 +8,7 @@
 
 <script>
     import BPMNDesigner from './components/bpmn/BPMNDesigner'
-    import DefaultPalette from './components/bpmn/palette/DefaultPalette'
+    import DefaultPalette from './components/bpmn/view/DefaultPalette'
     import {pizzaDiagram} from '../stub/pizzaDiagram';
 
     export default {

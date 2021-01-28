@@ -11,7 +11,9 @@
 </template>
 
 <script>
-    import BpmnModeler from 'bpmn-js/lib/Modeler'
+    import YModeler from './modeler/YModeler'
+    // import YModeler from 'bpmn-js/lib/Modeler'
+
     import propertiesPanelModule from 'bpmn-js-properties-panel';
     import propertiesProviderModule from 'bpmn-js-properties-panel/lib/provider/camunda';
     import camundaModdleDescriptor from 'camunda-bpmn-moddle/resources/camunda';
@@ -66,7 +68,7 @@
         emits: ['save'],
         mounted() {
             let self = this;
-            let viewer_ = new BpmnModeler({
+            let viewer_ = new YModeler({
                 container: self.$refs['y-bpmn-sketchpad'],
                 propertiesPanel: {
                     parent: '#properties-panel'
