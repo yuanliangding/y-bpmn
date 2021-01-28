@@ -1,15 +1,21 @@
 <template>
-    <BPMNDesigner :bpmnXML="pizzaDiagram" @save="save" :width="'90%'" :height="'1200px'"/>
+    <BPMNDesigner :bpmnXML="pizzaDiagram" @save="save" :width="'90%'" :height="'1200px'">
+        <template v-slot:palette>
+            <DefaultPalette />
+        </template>
+    </BPMNDesigner>
 </template>
 
 <script>
     import BPMNDesigner from './components/bpmn/BPMNDesigner'
+    import DefaultPalette from './components/bpmn/palette/DefaultPalette'
     import {pizzaDiagram} from '../stub/pizzaDiagram';
 
     export default {
         name: 'App',
         components: {
-            BPMNDesigner
+            BPMNDesigner,
+            DefaultPalette
         },
         data: function () {
             return {pizzaDiagram: pizzaDiagram}

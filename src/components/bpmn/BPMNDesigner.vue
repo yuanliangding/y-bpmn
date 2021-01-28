@@ -2,8 +2,11 @@
     <button @click="save_">
         保存
     </button>
-    <div id="svg" ref="svg" :style="style_">
+    <div id="y-bpmn-container" :style="style_">
+        <div id="y-bpmn-sketchpad" ref="y-bpmn-sketchpad" :style="style_" />
+        <slot name="palette"></slot>
     </div>
+
     <div class="properties-panel-parent" id="properties-panel"></div>
 </template>
 
@@ -64,7 +67,7 @@
         mounted() {
             let self = this;
             let viewer_ = new BpmnModeler({
-                container: self.$refs.svg,
+                container: self.$refs['y-bpmn-sketchpad'],
                 propertiesPanel: {
                     parent: '#properties-panel'
                 },
@@ -263,7 +266,7 @@
             // 调整左侧工具栏排版
             let adjustPalette = function() {
                 try {
-                    const canvas = self.$refs.svg;
+                    const canvas = self.$refs['y-bpmn-sketchpad'];
 
                     const djsPalStyle = {
                         width: "130px",
