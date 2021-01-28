@@ -1,5 +1,4 @@
 import PaletteProvider from 'bpmn-js/lib/features/palette/PaletteProvider'
-import hidden from './hidden';
 
 export default class SIEPaletteProvider extends PaletteProvider {
 
@@ -26,7 +25,6 @@ export default class SIEPaletteProvider extends PaletteProvider {
     getPaletteEntries(element){
         let paletteEntries = super.getPaletteEntries(element)
         console.log(paletteEntries)
-        hidden.forEach(h => delete paletteEntries[h])
         return paletteEntries
     }
 }
