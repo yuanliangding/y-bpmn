@@ -1,5 +1,5 @@
 <template>
-    <BPMNDesigner :bpmnXML="pizzaDiagram" @save="save" :width="'90%'" :height="'1200px'">
+    <BPMNDesigner :bpmnXML="pizzaDiagram" @save="save" :width="'1500px'" :height="'700px'">
         <template v-slot:palette>
             <DefaultPalette />
         </template>
@@ -35,6 +35,7 @@
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: #2c3e50;
+        margin-left: 60px;
         margin-top: 60px;
     }
 </style>
