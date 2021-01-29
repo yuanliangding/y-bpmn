@@ -4,7 +4,7 @@
     </button>
     <div id="y-bpmn-container" :style="style_">
         <div id="y-bpmn-sketchpad" ref="y-bpmn-sketchpad" :style="style_" />
-        <slot name="palette" />
+        <slot name="palette" v-if="bpmnContext.entries" />
     </div>
 
     <div class="properties-panel-parent" id="properties-panel"></div>
@@ -14,7 +14,7 @@
     import YModeler from './modeler/YModeler'
     // import YModeler from 'bpmn-js/lib/Modeler'
 
-    import {provide,ref} from  'vue';
+    import {onMounted, provide, reactive} from  'vue';
 
     import propertiesPanelModule from 'bpmn-js-properties-panel';
     import propertiesProviderModule from 'bpmn-js-properties-panel/lib/provider/camunda';
@@ -38,16 +38,19 @@
 
     export default {
         name: 'BPMNDesigner',
+        setup(){
+            let bpmnContext = reactive({})
+            onMounted(
+                () => {
+                    provide("bpmnContext", bpmnContext)
+                }
+            )
+            return {bpmnContext}
+        },
         data() {
             return {
-                saveXMLHandler:null
+                saveXMLHandler:null,
             }
-        },
-        setup(){
-            // const  color=ref('pink')
-            let entries = ['a','b']
-
-            provide("entries", ref(entries))
         },
         props: {
             width: {
@@ -74,6 +77,9 @@
             }
         },
         emits: ['save'],
+        created(){
+
+        },
         mounted() {
             let self = this;
             let viewer_ = new YModeler({
@@ -121,6 +127,11 @@
                 // }
 
             });
+
+            let defaultPalette = viewer_.get("palette")
+            this.bpmnContext.entries = defaultPalette.getEntries()
+            // provide("entries", ref(entries))
+
 
             // 解决代码框架bug. zoom is not a function
             viewer_.get('canvas').property = {
