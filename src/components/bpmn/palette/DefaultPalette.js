@@ -30,8 +30,6 @@ const DEFAULT_PRIORITY = 1000;
  * A palette containing modeling elements.
  */
 export default function DefaultPalette(eventBus, canvas) {
-
-    console.log(arguments)
     this._eventBus = eventBus;
     this._canvas = canvas;
 

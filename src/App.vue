@@ -18,7 +18,10 @@
             DefaultPalette
         },
         data: function () {
-            return {pizzaDiagram: pizzaDiagram}
+            return {
+                pizzaDiagram: pizzaDiagram,
+
+            }
         },
         methods: {
             save:function(xml){
