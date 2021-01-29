@@ -4,7 +4,7 @@
     </button>
     <div id="y-bpmn-container" :style="style_">
         <div id="y-bpmn-sketchpad" ref="y-bpmn-sketchpad" :style="style_" />
-        <slot name="palette"></slot>
+        <slot name="palette" />
     </div>
 
     <div class="properties-panel-parent" id="properties-panel"></div>
@@ -13,6 +13,8 @@
 <script>
     import YModeler from './modeler/YModeler'
     // import YModeler from 'bpmn-js/lib/Modeler'
+
+    import {provide,ref} from  'vue';
 
     import propertiesPanelModule from 'bpmn-js-properties-panel';
     import propertiesProviderModule from 'bpmn-js-properties-panel/lib/provider/camunda';
@@ -40,6 +42,12 @@
             return {
                 saveXMLHandler:null
             }
+        },
+        setup(){
+            // const  color=ref('pink')
+            let entries = ['a','b']
+
+            provide("entries", ref(entries))
         },
         props: {
             width: {
