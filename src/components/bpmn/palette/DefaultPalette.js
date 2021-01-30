@@ -167,6 +167,53 @@ DefaultPalette.prototype._init = function() {
     });
 };
 
+DefaultPalette.prototype._update = function() {
+
+    let entriesContainer = domQuery('.djs-palette-entries', this._container),
+        entries = this._entries = this.getEntries();
+
+    domClear(entriesContainer);
+
+    forEach(entries, function(entry, id) {
+
+        let grouping = entry.group || 'default';
+
+        let container = domQuery('[data-group=' + grouping + ']', entriesContainer);
+        if (!container) {
+            container = domify('<div class="group" data-group="' + grouping + '"></div>');
+            entriesContainer.appendChild(container);
+        }
+
+        let html = entry.html || (
+            entry.separator ?
+                '<hr class="separator" />' :
+                '<div class="entry" draggable="true"></div>');
+
+
+        let control = domify(html);
+        container.appendChild(control);
+
+        if (!entry.separator) {
+            domAttr(control, 'data-action', id);
+
+            if (entry.title) {
+                domAttr(control, 'title', entry.title);
+            }
+
+            if (entry.className) {
+                addClasses(control, entry.className);
+            }
+
+            if (entry.imageUrl) {
+                control.appendChild(domify('<img src="' + entry.imageUrl + '">'));
+            }
+        }
+    });
+
+    // open after update
+    this.open();
+};
+
 DefaultPalette.prototype._getProviders = function(id) {
 
     console.log(id)
@@ -216,54 +263,6 @@ DefaultPalette.prototype._toggleState = function(state) {
         open: this.isOpen()
     });
 };
-
-DefaultPalette.prototype._update = function() {
-
-    let entriesContainer = domQuery('.djs-palette-entries', this._container),
-        entries = this._entries = this.getEntries();
-
-    domClear(entriesContainer);
-
-    forEach(entries, function(entry, id) {
-
-        let grouping = entry.group || 'default';
-
-        let container = domQuery('[data-group=' + grouping + ']', entriesContainer);
-        if (!container) {
-            container = domify('<div class="group" data-group="' + grouping + '"></div>');
-            entriesContainer.appendChild(container);
-        }
-
-        let html = entry.html || (
-            entry.separator ?
-                '<hr class="separator" />' :
-                '<div class="entry" draggable="true"></div>');
-
-
-        let control = domify(html);
-        container.appendChild(control);
-
-        if (!entry.separator) {
-            domAttr(control, 'data-action', id);
-
-            if (entry.title) {
-                domAttr(control, 'title', entry.title);
-            }
-
-            if (entry.className) {
-                addClasses(control, entry.className);
-            }
-
-            if (entry.imageUrl) {
-                control.appendChild(domify('<img src="' + entry.imageUrl + '">'));
-            }
-        }
-    });
-
-    // open after update
-    this.open();
-};
-
 
 /**
  * Trigger an action available on the palette
