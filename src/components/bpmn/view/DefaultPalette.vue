@@ -1,16 +1,11 @@
 <template>
-    <div id="y-bpmn-palette-container">
-        <!--        { "group": "tools", "className": "bpmn-icon-hand-tool", "title": "", "action": {} }-->
-
-
-        <div :class="['y-bpmn-palette-group', 'group']" :data-group="group.group" v-for="group in bpmnContext.entries" v-bind:key="group" >
-            <div :class="['y-bpmn-palette-item', 'entry', entry.className]"
+    <div id="y-bpmn-palette-container" :style="{width: width, height: height}">
+        <div :class="['y-bpmn-palette-group']" :style="{width: width}" :data-group="group.group" v-for="group in bpmnContext.entries" v-bind:key="group" >
+            <div :class="['y-bpmn-palette-item', entry.className]"
                  :draggable="true"
-                 :data-action="'entry.dataAction'"
+                 :data-action="entry.dataAction"
                  :title="entry.title"
                  v-for="entry in group.list" v-bind:key="entry" >
-<!--{{entry.title}}-->
-
             </div>
             <hr class="separator">
         </div>
@@ -23,7 +18,14 @@
     export default {
         name: "DefaultPalette",
         props: {
-
+            width: {
+                type: String,
+                default: "100%"
+            },
+            height: {
+                type: String,
+                default: "1000px"
+            }
         },
         data: function(){
             return {
@@ -49,12 +51,22 @@
 
 <style scoped>
     #y-bpmn-palette-container {
-        flex-flow:column wrap
-
+        flex-flow:column nowrap;
+        display:inline;
     }
 
-    #y-bpmn-palette-container .y-bpmn-palette-item {
+    #y-bpmn-palette-container .y-bpmn-palette-group {
+        flex-flow:row wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        align-content: flex-start
+    }
 
+    #y-bpmn-palette-container .y-bpmn-palette-group .y-bpmn-palette-item {
+        width: 60px;
+        height: 60px;
+        margin: 5px;
+        display:inline;
     }
 
 </style>

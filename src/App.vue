@@ -1,7 +1,7 @@
 <template>
     <BPMNDesigner :bpmnXML="pizzaDiagram" @save="save" :width="'1500px'" :height="'700px'">
         <template v-slot:palette>
-            <DefaultPalette />
+            <DefaultPalette  :width="'95px'" :height="'400px'" />
         </template>
     </BPMNDesigner>
 </template>

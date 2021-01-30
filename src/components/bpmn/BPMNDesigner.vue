@@ -3,7 +3,7 @@
         保存
     </button>
     <div id="y-bpmn-container" :style="style_">
-        <div id="y-bpmn-sketchpad" ref="y-bpmn-sketchpad" :style="style_" />
+        <div id="y-bpmn-sketchpad" ref="y-bpmn-sketchpad" :style="{width: width, height: height}" />
         <slot name="palette" v-if="bpmnContext.entries" />
     </div>
 
@@ -67,9 +67,7 @@
             }
         },
         computed: {
-            style_: function () {
-                return {width: this.width, height: this.height}
-            }
+
         },
         methods: {
             save_: function () {
@@ -142,8 +140,9 @@
                 }
 
                 let group = groupIndex[eVal.group]
-                console.log("group", group)
-                group['list'].push({...eVal, 'dataAction':eKey})
+                let e = {...eVal}
+                e.dataAction = eKey
+                group['list'].push(e)
             }
 
             this.bpmnContext.entries = groups
