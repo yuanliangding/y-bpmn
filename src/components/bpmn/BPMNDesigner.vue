@@ -129,8 +129,24 @@
             });
 
             let defaultPalette = viewer_.get("palette")
-            this.bpmnContext.entries = defaultPalette.getEntries()
-            // provide("entries", ref(entries))
+            // [{ "group": "tools", "className": "bpmn-icon-hand-tool", "title": "", "action": {} },...]
+            let entries = defaultPalette.getEntries()
+
+            let groupIndex = {}
+            let groups = []
+            for (let eKey in entries) {
+                let eVal = entries[eKey]
+                if (!groupIndex[eVal.group]) {
+                    groupIndex[eVal.group] = {'group':eVal.group, 'list':[]}
+                    groups.push(groupIndex[eVal.group])
+                }
+
+                let group = groupIndex[eVal.group]
+                console.log("group", group)
+                group['list'].push({...eVal, 'dataAction':eKey})
+            }
+
+            this.bpmnContext.entries = groups
 
 
             // 解决代码框架bug. zoom is not a function
