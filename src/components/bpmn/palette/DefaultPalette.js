@@ -191,6 +191,7 @@ DefaultPalette.prototype._update = function() {
 
 
         let control = domify(html);
+        console.log('control', control)
         container.appendChild(control);
 
         if (!entry.separator) {
@@ -208,6 +209,8 @@ DefaultPalette.prototype._update = function() {
                 control.appendChild(domify('<img src="' + entry.imageUrl + '">'));
             }
         }
+
+
     });
 
     // open after update

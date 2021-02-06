@@ -6,6 +6,7 @@
                  :data-action="entry.dataAction"
                  :title="entry.title"
                  v-for="entry in group.list" v-bind:key="entry" >
+                &#xe84d;
             </div>
             <hr class="separator">
         </div>
